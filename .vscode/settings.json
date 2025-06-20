@@ -1,5 +1,6 @@
 {
   "code-runner.executorMap": {
-    "typescript": "npx ts-node --files --transpile-only",
+    // "typescript": "npx ts-node --files --transpile-only"
+    "typescript": "node --loader ts-node/esm \"$fullFileName\"" // Use "$fullFileName" para ser genérico
   }
 }

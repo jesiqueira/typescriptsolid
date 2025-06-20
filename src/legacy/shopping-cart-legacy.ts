@@ -1,18 +1,18 @@
-import { CartItem } from './interfaces/cart-items'
-import { OrderStatus } from './interfaces/order-status'
+type CartItemLegacy = { name: string; price: number }
+type OrderStatusLegacy = 'open' | 'closed'
 
-export class shoppingCart {
-  private readonly _items: CartItem[] = []
-  private _orderStatus: OrderStatus = 'open'
+class shoppingCartLegacy {
+  private readonly _items: CartItemLegacy[] = []
+  private _orderStatus: OrderStatusLegacy = 'open'
 
-  get items(): Readonly<CartItem[]> {
+  get items(): Readonly<CartItemLegacy[]> {
     return this._items
   }
-  get orderStatus(): OrderStatus {
+  get orderStatus(): OrderStatusLegacy {
     return this._orderStatus
   }
 
-  addItem(item: CartItem): void {
+  addItem(item: CartItemLegacy): void {
     this._items.push(item)
   }
 
@@ -50,3 +50,14 @@ export class shoppingCart {
     this._items.length = 0
   }
 }
+
+const shoppiingCartLegacy = new shoppingCartLegacy()
+shoppiingCartLegacy.addItem({ name: 'Camiseta', price: 49.9 })
+shoppiingCartLegacy.addItem({ name: 'Caderon', price: 9.9 })
+shoppiingCartLegacy.addItem({ name: 'Lápis', price: 1.59 })
+
+console.log(shoppiingCartLegacy.items)
+console.log(shoppiingCartLegacy.total())
+console.log(shoppiingCartLegacy.orderStatus)
+shoppiingCartLegacy.checkout()
+console.log(shoppiingCartLegacy.orderStatus)
