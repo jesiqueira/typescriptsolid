@@ -1,12 +1,21 @@
-import { shoppingCart } from './shopping-cart.js'
+import { shoppingCart } from './entities/shopping-cart.js'
+import Order from './entities/order.js'
+import Persistency from './services/persistency.js'
+import Messaging from './services/messaging.js'
+import Product from './entities/product.js'
 
 const shoppiingCart = new shoppingCart()
-shoppiingCart.addItem({ name: 'Camiseta', price: 49.9 })
-shoppiingCart.addItem({ name: 'Caderon', price: 9.9 })
-shoppiingCart.addItem({ name: 'Lápis', price: 1.59 })
+const messaging = new Messaging()
+const persistency = new Persistency()
+
+const order = new Order(shoppiingCart, messaging, persistency)
+
+shoppiingCart.addItem(new Product('Camiseta', 49.9))
+shoppiingCart.addItem(new Product('Caderon', 4.9))
+shoppiingCart.addItem(new Product('Lápis', 1.59))
 
 console.log(shoppiingCart.items)
 console.log(shoppiingCart.total())
-console.log(shoppiingCart.orderStatus)
-shoppiingCart.checkout()
-console.log(shoppiingCart.orderStatus)
+console.log(order.orderStatus)
+order.checkout()
+console.log(order.orderStatus)
